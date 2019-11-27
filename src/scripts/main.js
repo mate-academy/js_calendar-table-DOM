@@ -4,16 +4,22 @@
 const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
-  const firstDay = new Date(year, month, 0).getDay();
+  let firstDay = new Date(year, month - 1).getDay();
+
+  firstDay = firstDay === 0 ? 7 : firstDay - 1;
+
   const numberOfDays = Array(new Date(year, month + 1, 0).getDate()).fill('')
-                       .map((item, index) => index + 1);
+                       .map((i, index) => index + 1);
   const days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'НД'];
 
   element.innerHTML = `
     <table>
+      <thead>
         <tr>
           ${days.map(day => `<th>${day}</th>`).join('')}
         </tr>
+      </thead>
+      <tbody>
         <tr>
           ${Array(firstDay).fill('').map(item => `<td></td>`).join('')}
           ${numberOfDays.map((day, index) => {
@@ -23,10 +29,11 @@ function calendarTable(year, month, element) {
 
             return `<td>${day}</td>`;
           }).join('')}
+      </tbody>
     </table>
   `;
 
   return element;
 }
 
-calendarTable(2019, 10, calendar);
+calendarTable(2019, 11, calendar);
