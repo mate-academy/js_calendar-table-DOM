@@ -16,9 +16,10 @@ function calendarTable(year, month, element) {
   const monthLength = new Date(year, month, 0).getDate();
   const monthStartDay = getLocalDay(new Date(year, month - 1));
   const monthEndDay = getLocalDay(new Date(year, month - 1, monthLength));
+  const daysArr = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
 
-  let htmlCode = `<tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th>
-  <th>FR</th><th>SA</th><th>SU</th></tr><tr>`;
+  let htmlCode = `<thead><tr>${daysArr
+    .map(day => `<th>${day}</th>`).join('')}</tr></thead><tbody><tr>`;
 
   for (let i = 1; i < monthStartDay; i++) {
     htmlCode += `<td></td>`;
@@ -36,7 +37,7 @@ function calendarTable(year, month, element) {
     htmlCode += `<td></td>`;
   }
 
-  element.innerHTML = `<table> ${htmlCode} </tr></table>`;
+  element.innerHTML = `<table>${htmlCode}</tr></tbody></table>`;
 }
 
 calendarTable(2019, 11, calendar);
