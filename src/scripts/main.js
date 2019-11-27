@@ -17,9 +17,7 @@ function calendarTable(year, month, element) {
   const monthStartDay = getLocalDay(new Date(year, month - 1));
   const monthEndDay = getLocalDay(new Date(year, month - 1, monthLength));
 
-  let htmlCode = '';
-
-  htmlCode += `<tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th>
+  let htmlCode = `<tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th>
   <th>FR</th><th>SA</th><th>SU</th></tr><tr>`;
 
   for (let i = 1; i < monthStartDay; i++) {
