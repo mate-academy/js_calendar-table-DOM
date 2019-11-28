@@ -17,27 +17,31 @@ function calendarTable(year, month, element) {
   const monthStartDay = getLocalDay(new Date(year, month - 1));
   const monthEndDay = getLocalDay(new Date(year, month - 1, monthLength));
   const daysArr = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+  const datesArr = Array.from(Array(monthLength).keys()).map(date => date + 1);
 
-  let htmlCode = `<thead><tr>${daysArr
-    .map(day => `<th>${day}</th>`).join('')}</tr></thead><tbody><tr>`;
-
-  for (let i = 1; i < monthStartDay; i++) {
-    htmlCode += `<td></td>`;
-  }
-
-  for (let i = 1; i <= monthLength; i++) {
-    if ((i + monthStartDay - 1) % 7 === 0) {
-      htmlCode += `<td>${i}</td></tr><tr>`;
-    } else {
-      htmlCode += `<td>${i}</td>`;
-    }
-  }
-
-  for (let i = 1; i <= 7 - monthEndDay; i++) {
-    htmlCode += `<td></td>`;
-  }
-
-  element.innerHTML = `<table>${htmlCode}</tr></tbody></table>`;
+  element.innerHTML = `
+  <table>
+    <thead>
+      <tr>
+      
+     ${daysArr.map(day => `<th>${day}</th>`).join('')}
+      
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      
+     ${Array(monthStartDay - 1).fill('').map(date => `<td></td>`).join('')}
+     ${datesArr
+    .map(date => (date + monthStartDay - 1) % 7 === 0
+      ? `<td>${date}</td></tr><tr>`
+      : `<td>${date}</td>`)
+    .join('')}
+     ${Array(7 - monthEndDay).fill('').map(date => `<td></td>`).join('')}
+     
+      </tr>
+    </tbody>
+  </table>`;
 }
 
-calendarTable(2019, 11, calendar);
+calendarTable(2019, 12, calendar);
