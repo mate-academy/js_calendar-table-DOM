@@ -29,6 +29,9 @@ function calendarTable(year, month, element) {
 
             return `<td>${day}</td>`;
           }).join('')}
+          ${Array(35 - firstDay - numberOfDays.length).fill('').map(item => {
+            return `<td></td>`;
+          }).join('')}
       </tbody>
     </table>
   `;
@@ -36,4 +39,4 @@ function calendarTable(year, month, element) {
   return element;
 }
 
-calendarTable(2019, 11, calendar);
+calendarTable(2019, 5, calendar);
