@@ -4,13 +4,12 @@ const calendar = document.querySelector('#calendar');
 
 const calendarTable = (year, month, element) => {
   const date = new Date(year, month - 1);
-  let table = '';
   let head = '';
   let body = '';
-  const week = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+  const WEEK_DAYS = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
   let day;
 
-  for (const weekday of week) {
+  for (const weekday of WEEK_DAYS) {
     head += `<th>${weekday}</th>`;
   }
 
@@ -22,7 +21,7 @@ const calendarTable = (year, month, element) => {
     body += `<td>${date.getDate()}</td>`;
 
     if (date.getDay() % 7 === 0) {
-      body += `<tr></tr>`;
+      body += `</tr><tr>`;
     }
 
     day = date.getDay();
@@ -35,7 +34,11 @@ const calendarTable = (year, month, element) => {
     }
   }
 
-  table = `<thead><tr>${head}</tr></thead><tbody><tr>${body}</tr></tbody>`;
+  head = `<thead><tr>${head}</tr></thead>`;
+  body = `<tbody><tr>${body}</tr></tbody>`;
+
+  const table = head + body;
+
   element.innerHTML = `<table>${table}</table>`;
 };
 
