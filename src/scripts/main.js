@@ -21,23 +21,10 @@ const calendarTable = function(year, month, element) {
   const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     .map(day => `<th>${day}</th>`).join('');
 
-  const emptyCells = function() {
-    let start = ``;
-
-    for (let i = 0; i < startDay(date); i++) {
-      start += `<td></td>`;
-    }
-
-    let end = ``;
-
-    if (startDay(date) !== 0) {
-      for (let i = startDay(date); i < 7; i++) {
-        end += `<td></td>`;
-      }
-    }
-
-    return { start, end };
-  };
+  const emptyCellsToStart = (number) =>
+    Array(number).fill('<td></td>').reduce((row, cell) => row + cell, '');
+  const emptyCellsToEnd = (number) =>
+    Array(number).fill('<td></td>').reduce((row, cell) => row + cell, '');
 
   const allDatesInMonth = function() {
     let dates = ``;
@@ -56,9 +43,9 @@ const calendarTable = function(year, month, element) {
 
   element.innerHTML = `<table>
                       <tr>${weekDays}</tr>
-                      ${emptyCells().start}
+                      ${emptyCellsToStart(startDay(date))}
                       ${allDatesInMonth()}
-                      ${emptyCells().end}
+                      ${emptyCellsToEnd(7 - startDay(date))}
                       </table>`;
 };
 
