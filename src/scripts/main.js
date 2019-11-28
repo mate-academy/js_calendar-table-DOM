@@ -5,7 +5,7 @@ const calendar = document.querySelector('#calendar');
 const getDaysInMonth = function(month, year) {
   return new Date(year, month, 0).getDate();
 };
-const getDay = function(date) {
+const startDay = function(date) {
   let day = date.getDay();
 
   if (day === 0) {
@@ -15,57 +15,50 @@ const getDay = function(date) {
   return day - 1;
 };
 
-const addDays = function() {
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-
-  return days.map(day => `<th>${day}</th>`).join('');
-};
-
 const calendarTable = function(year, month, element) {
-  const mon = month - 1;
-  const d = new Date(year, mon);
+  const currentMonth = month - 1;
+  const date = new Date(year, currentMonth);
+  const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    .map(day => `<th>${day}</th>`).join('');
 
-  const emptyFieldsBegin = function() {
-    let empty = ``;
+  const emptyCells = function() {
+    let start = ``;
 
-    for (let i = 0; i < getDay(new Date(year, mon)); i++) {
-      empty += `<td></td>`;
+    for (let i = 0; i < startDay(date); i++) {
+      start += `<td></td>`;
     }
 
-    return empty;
+    let end = ``;
+
+    if (startDay(date) !== 0) {
+      for (let i = startDay(date); i < 7; i++) {
+        end += `<td></td>`;
+      }
+    }
+
+    return { start, end };
   };
+
   const allDatesInMonth = function() {
     let dates = ``;
 
     for (let j = 1; j <= getDaysInMonth(month, year); j++) {
       dates += `<td>${j}</td>`;
 
-      if (getDay(d) % 7 === 6) {
+      if (startDay(date) % 7 === 6) {
         dates += `</tr><tr>`;
       }
-      d.setDate(d.getDate() + 1);
+      date.setDate(date.getDate() + 1);
     }
 
     return dates;
   };
 
-  const addEmptyFieldsEnd = function() {
-    let empty = ``;
-
-    if (getDay(d) !== 0) {
-      for (let i = getDay(d); i < 7; i++) {
-        empty += `<td></td>`;
-      }
-
-      return empty;
-    }
-  };
-
   element.innerHTML = `<table>
-                      <tr>${addDays()}</tr>
-                      ${emptyFieldsBegin()}
+                      <tr>${weekDays}</tr>
+                      ${emptyCells().start}
                       ${allDatesInMonth()}
-                      ${addEmptyFieldsEnd()}
+                      ${emptyCells().end}
                       </table>`;
 };
 
