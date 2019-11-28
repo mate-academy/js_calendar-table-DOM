@@ -1,6 +1,7 @@
 'use strict';
 
 const calendar = document.querySelector('#calendar');
+const days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'НД'];
 
 const getDaysFromMoth = (month, year) => {
   return new Date(year, month, 0).getDate();
@@ -16,11 +17,7 @@ const getFistDayOfMonth = (date) => {
   return day - 1;
 };
 
-const addDays = () => {
-  const days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'НД'];
-
-  return days.map(day => `<th>${day}</th>`).join('');
-};
+const addDays = () => days.map(day => `<th>${day}</th>`).join('');
 
 const calendarTable = (year, month, element) => {
   const currentMonth = month - 1;
@@ -37,19 +34,19 @@ const calendarTable = (year, month, element) => {
   };
 
   const allDatesInMonth = () => {
-    let dates = ``;
+    let date = ``;
 
     for (let i = 1; i <= getDaysFromMoth(month, year); i++) {
-      dates += `<td>${i}</td>`;
+      date += `<td>${i}</td>`;
 
       if (getFistDayOfMonth(day) === 6) {
-        dates += `</tr><tr>`;
+        date += `</tr><tr>`;
       }
 
       day.setDate(day.getDate() + 1);
     }
 
-    return dates;
+    return date;
   };
 
   const emptyCellsInEnd = () => {
