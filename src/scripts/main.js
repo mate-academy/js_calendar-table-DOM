@@ -22,23 +22,19 @@ function calendarTable(year, month, element) {
   element.innerHTML = `
   <table>
     <thead>
-      <tr>
-      
-     ${daysArr.map(day => `<th>${day}</th>`).join('')}
-      
+      <tr>    
+     ${daysArr.map(day => `<th>${day}</th>`).join('')}      
       </tr>
     </thead>
     <tbody>
-      <tr>
-      
+      <tr>      
      ${Array(monthStartDay - 1).fill('').map(date => `<td></td>`).join('')}
      ${datesArr
     .map(date => (date + monthStartDay - 1) % 7 === 0
       ? `<td>${date}</td></tr><tr>`
       : `<td>${date}</td>`)
     .join('')}
-     ${Array(7 - monthEndDay).fill('').map(date => `<td></td>`).join('')}
-     
+     ${Array(7 - monthEndDay).fill('').map(date => `<td></td>`).join('')}     
       </tr>
     </tbody>
   </table>`;
