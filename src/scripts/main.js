@@ -7,13 +7,17 @@ const calendarTable = (year, month, element) => {
   let head = '';
   let body = '';
   const WEEK_DAYS = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
-  let day;
+  let day = date.getDay();
 
   for (const weekday of WEEK_DAYS) {
     head += `<th>${weekday}</th>`;
   }
 
-  for (let i = 0; i < date.getDay() - 1; i++) {
+  if (day === 0) {
+    day = 7;
+  }
+
+  for (let i = 0; i < day - 1; i++) {
     body += `<td></td>`;
   }
 
@@ -42,4 +46,4 @@ const calendarTable = (year, month, element) => {
   element.innerHTML = `<table>${table}</table>`;
 };
 
-calendarTable(2019, 10, calendar);
+calendarTable(1993, 9, calendar);
