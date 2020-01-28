@@ -9,7 +9,6 @@ h1 {
   font-weight: normal;
   font-style: normal;
 }
-
 body {
   background: #eee;
 }
@@ -23,20 +22,18 @@ body {
   color: #118488;
   background-color: white;
   width: 560px;
+  border: 1px solid #118488;
 }
-
 .calendar__head {
   background: #fa555c;
   color: #fff;
 }
-
 .calendar__cell {
   width: 80px;
   height: 80px;
   border: 1px solid #118488;
   text-align: center;
 }
-
 .calendar__cell_pure {
   border: none;
 }

@@ -97,4 +97,4 @@ function calendarTable(year, month, element) {
   return element;
 }
 
-calendarTable(2018, 4, calendar);
+calendarTable(2018, 8, calendar);

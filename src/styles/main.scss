@@ -11,11 +11,13 @@ body {
 }
 
 .calendar {
+
   &__wrapper {
     border-collapse: collapse;
     color: #118488;
     background-color: white;
     width: $width-cell*7;
+    border: 1px solid #118488;
   }
 
   &__head {
