@@ -11,26 +11,28 @@ body {
 }
 
 .calendar {
-  width: 702px;
-  height: 600px;
+  width: 352px;
+  height: 300px;
+  margin: 50px auto;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
+  font-size: 15px;
   text-align: center;
-  line-height: 100px;
+  line-height: 50px;
   font-weight: 600;
   color: #248156;
   border: 1px solid #248156;
+  background-color: #fff;
 
   &__days-list {
     width: 100%;
-    height: 100px;
+    height: 50px;
     background-color: #fa3b3b;
     display: flex;
   }
 
   &__day {
     width: 100px;
-    height: 100px;
+    height: 50px;
     color: #fff;
     border: #248156 solid 1px;
   }
@@ -41,8 +43,8 @@ body {
   }
 
   &__date {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     border: #248156 solid 1px;
   }
 }
