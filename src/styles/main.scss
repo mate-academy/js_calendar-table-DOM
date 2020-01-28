@@ -2,25 +2,47 @@
 @import "fonts";
 @import "typography";
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: $c-gray;
 }
 
-table {
-  border-collapse: collapse;
-  color: #118488;
-  background-color: white;
-}
-
-td,
-th {
-  border: 1px solid #118488;
-  padding: 10px;
+.calendar {
+  width: 702px;
+  height: 600px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
   text-align: center;
-}
+  line-height: 100px;
+  font-weight: 600;
+  color: #248156;
+  border: 1px solid #248156;
 
-th {
-  font-weight: bold;
-  background-color: #fd5c63;
-  color: #fff;
+  &__days-list {
+    width: 100%;
+    height: 100px;
+    background-color: #fa3b3b;
+    display: flex;
+  }
+
+  &__day {
+    width: 100px;
+    height: 100px;
+    color: #fff;
+    border: #248156 solid 1px;
+  }
+
+  &__dates-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__date {
+    width: 100px;
+    height: 100px;
+    border: #248156 solid 1px;
+  }
 }
