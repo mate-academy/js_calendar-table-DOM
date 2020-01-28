@@ -35,14 +35,13 @@ function calendarTable(year, month, element) {
     calendarHead.appendChild(calendarCell);
   }
 
-  const calendarLine = document.createElement('tr');
+  let calendarLine = document.createElement('tr');
 
-  const pureCell = fistDayOfWeak - 1;
+  let pureCell = fistDayOfWeak - 1;
 
   for (let i = 1; i <= pureCell; i++) {
     calendarCell = document.createElement('td');
     calendarCell.classList.add('calendar__cell');
-    calendarCell.classList.add('calendar__cell_pure');
     calendarLine.appendChild(calendarCell);
   }
 
@@ -81,15 +80,23 @@ function calendarTable(year, month, element) {
   const restDays = daysNumber - ceilLines * 7 - firstLineCells;
 
   if (restDays > 0) {
-    calendarCeilLine = document.createElement('tr');
+    calendarLine = document.createElement('tr');
 
-    for (let i = daysNumber - restDays; i <= daysNumber; i++) {
+    for (let i = daysNumber - restDays + 1; i <= daysNumber; i++) {
       calendarCell = document.createElement('td');
       calendarCell.classList.add('calendar__cell');
       calendarCell.innerHTML = i;
-      calendarCeilLine.appendChild(calendarCell);
+      calendarLine.appendChild(calendarCell);
     }
-    calenadarWrapper.appendChild(calendarCeilLine);
+    calenadarWrapper.appendChild(calendarLine);
+
+    pureCell = 7 - restDays;
+
+    for (let i = 1; i <= pureCell; i++) {
+      calendarCell = document.createElement('td');
+      calendarCell.classList.add('calendar__cell');
+      calendarLine.appendChild(calendarCell);
+    }
   }
 
   calendar.appendChild(calenadarWrapper);
@@ -97,4 +104,4 @@ function calendarTable(year, month, element) {
   return element;
 }
 
-calendarTable(2018, 8, calendar);
+calendarTable(2019, 11, calendar);

@@ -15,9 +15,10 @@ body {
   &__wrapper {
     border-collapse: collapse;
     color: #118488;
-    background-color: white;
+    background-color: #fff;
     width: $width-cell*7;
     border: 1px solid #118488;
+    margin: auto;
   }
 
   &__head {
@@ -27,11 +28,15 @@ body {
 
   &__cell {
     @include cell-size(80px, 80px);
-    border: 1px solid #118488;
+    border: 2px solid #118488;
     text-align: center;
-  }
-
-  &__cell_pure {
-    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 200ms linear, color 200ms linear;
+    
+    &:hover {
+      background-color: $head-background;
+      color: #fff;
+    }
   }
 }

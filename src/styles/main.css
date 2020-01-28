@@ -20,9 +20,10 @@ body {
 .calendar__wrapper {
   border-collapse: collapse;
   color: #118488;
-  background-color: white;
+  background-color: #fff;
   width: 560px;
   border: 1px solid #118488;
+  margin: auto;
 }
 .calendar__head {
   background: #fa555c;
@@ -31,11 +32,15 @@ body {
 .calendar__cell {
   width: 80px;
   height: 80px;
-  border: 1px solid #118488;
+  border: 2px solid #118488;
   text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 200ms linear, color 200ms linear;
 }
-.calendar__cell_pure {
-  border: none;
+.calendar__cell:hover {
+  background-color: #fa555c;
+  color: #fff;
 }
 
 /*# sourceMappingURL=main.css.map */
