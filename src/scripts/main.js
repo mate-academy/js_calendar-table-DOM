@@ -3,13 +3,9 @@
 const calendar = document.querySelector('#calendar');
 
 const dayNumber = (date) => {
-  let day = date.getDay();
+  const day = date.getDay();
 
-  if (day === 0) {
-    day = 7;
-  }
-
-  return day;
+  return day === 0 ? 7 : day;
 };
 
 function calendarTable(year, month, element) {
