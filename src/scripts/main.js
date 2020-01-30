@@ -10,6 +10,7 @@ function calendarTable(year, month, element) {
   const table = document.createElement('table');
   const daysOfWeek = document.createElement('tr');
 
+  element.innerHTML = '';
   element.append(table);
   table.append(daysOfWeek);
 
