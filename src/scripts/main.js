@@ -16,7 +16,6 @@ function calendarTable(year, month, element) {
 
   for (let i = 0; i <= 6; i++) {
     const dayOfWeek = document.createElement('th');
-
     const number = days[i];
 
     dayOfWeek.innerHTML = number;
@@ -28,7 +27,8 @@ function calendarTable(year, month, element) {
 
   if (daysInMonth === 28 && firstDay === 1) {
     amountOfWeeks = 4;
-  } else if ((daysInMonth === 31 && (!firstDay || firstDay === 6))
+  } else if (
+    (daysInMonth === 31 && (!firstDay || firstDay === 6))
     || (daysInMonth === 30 && !firstDay)) {
     amountOfWeeks = 6;
   } else {
