@@ -2,22 +2,30 @@
 
 const calendar = document.querySelector('#calendar');
 
+function cellCreate(td, tr, className, counter = '') {
+  td.classList.add(className);
+  td.innerHTML = counter;
+  tr.appendChild(td);
+}
+
 function calendarTable(year, month, element) {
   let validMonth = String(month);
 
-  if (validMonth.length < 2) {
-    validMonth = `0${validMonth}`;
-  }
+  validMonth = validMonth.padStart(2, 0);
 
   const daysNumber = new Date(year, month, 0).getDate();
-  let fistDayOfWeak = new Date(`${year}-${validMonth}-01`).getDay();
+  let fistDayOfWeek = new Date(`${year}-${validMonth}-01`).getDay();
 
-  if (fistDayOfWeak === 0) {
-    fistDayOfWeak = 7;
+  if (fistDayOfWeek === 0) {
+    fistDayOfWeek = 7;
   }
 
   const weekdays = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
+  const calendarCellClass = 'calendar__cell';
   const calenadarWrapper = document.createElement('table');
+
+  calendar.innerHTML = '';
+  calendar.prepend(calenadarWrapper);
 
   calenadarWrapper.classList.add('calendar__wrapper');
 
@@ -30,78 +38,65 @@ function calendarTable(year, month, element) {
   for (let i = 0; i < weekdays.length; i++) {
     calendarCell = document.createElement('th');
 
-    calendarCell.classList.add('calendar__cell');
-    calendarCell.innerHTML = weekdays[i];
-    calendarHead.appendChild(calendarCell);
+    cellCreate(calendarCell, calendarHead, calendarCellClass, weekdays[i]);
   }
 
   let calendarLine = document.createElement('tr');
 
-  let pureCell = fistDayOfWeak - 1;
+  let emptyCell = fistDayOfWeek - 1;
 
-  for (let i = 1; i <= pureCell; i++) {
+  for (let i = 1; i <= emptyCell; i++) {
     calendarCell = document.createElement('td');
-    calendarCell.classList.add('calendar__cell');
-    calendarLine.appendChild(calendarCell);
+    cellCreate(calendarCell, calendarLine, calendarCellClass);
   }
 
-  const firstLineCells = 7 - fistDayOfWeak + 1;
+  const firstWeek = 7 - fistDayOfWeek + 1;
 
-  for (let i = 1; i <= firstLineCells; i++) {
+  for (let i = 1; i <= firstWeek; i++) {
     calendarCell = document.createElement('td');
 
-    calendarCell.classList.add('calendar__cell');
-    calendarCell.innerHTML = i;
-    calendarLine.appendChild(calendarCell);
+    cellCreate(calendarCell, calendarLine, calendarCellClass, i);
   }
   calenadarWrapper.appendChild(calendarHead);
   calenadarWrapper.appendChild(calendarLine);
 
-  const ceilLines = Math.floor((daysNumber - firstLineCells) / 7);
-  let begin = firstLineCells + 1;
+  const fullWeek = Math.floor((daysNumber - firstWeek) / 7);
+  let start = firstWeek + 1;
   let end;
-  let calendarCeilLine;
+  let fullWeekLine;
 
-  for (let i = 1; i <= ceilLines; i++) {
-    calendarCeilLine = document.createElement('tr');
-    end = begin + 7;
+  for (let i = 1; i <= fullWeek; i++) {
+    fullWeekLine = document.createElement('tr');
+    end = start + 7;
 
-    for (let j = begin; j < end; j++) {
+    for (let j = start; j < end; j++) {
       calendarCell = document.createElement('td');
-      calendarCell.classList.add('calendar__cell');
-      calendarCell.innerHTML = j;
-      calendarCeilLine.appendChild(calendarCell);
+
+      cellCreate(calendarCell, fullWeekLine, calendarCellClass, j);
     }
 
-    begin = end;
-    calenadarWrapper.appendChild(calendarCeilLine);
+    start = end;
+    calenadarWrapper.appendChild(fullWeekLine);
   }
 
-  const restDays = daysNumber - ceilLines * 7 - firstLineCells;
+  const restDays = daysNumber - fullWeek * 7 - firstWeek;
 
   if (restDays > 0) {
     calendarLine = document.createElement('tr');
 
     for (let i = daysNumber - restDays + 1; i <= daysNumber; i++) {
       calendarCell = document.createElement('td');
-      calendarCell.classList.add('calendar__cell');
-      calendarCell.innerHTML = i;
-      calendarLine.appendChild(calendarCell);
+      cellCreate(calendarCell, calendarLine, calendarCellClass, i);
     }
     calenadarWrapper.appendChild(calendarLine);
 
-    pureCell = 7 - restDays;
+    emptyCell = 7 - restDays;
 
-    for (let i = 1; i <= pureCell; i++) {
+    for (let i = 1; i <= emptyCell; i++) {
       calendarCell = document.createElement('td');
-      calendarCell.classList.add('calendar__cell');
-      calendarLine.appendChild(calendarCell);
+      cellCreate(calendarCell, calendarLine, calendarCellClass);
     }
   }
-
-  calendar.appendChild(calenadarWrapper);
-
-  return element;
 }
 
-calendarTable(2019, 11, calendar);
+calendarTable(2019, 10, calendar);

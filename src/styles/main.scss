@@ -18,7 +18,7 @@ body {
     background-color: #fff;
     width: $width-cell*7;
     border: 1px solid #118488;
-    margin: auto;
+    margin: 30px auto;
   }
 
   &__head {
@@ -33,7 +33,7 @@ body {
     font-size: 18px;
     font-weight: bold;
     transition: background-color 200ms linear, color 200ms linear;
-    
+
     &:hover {
       background-color: $head-background;
       color: #fff;
