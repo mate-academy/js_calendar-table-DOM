@@ -1,81 +1,52 @@
 'use strict';
 
-const DAYS = {
-  0: 'mon',
-  1: 'tue',
-  2: 'wed',
-  3: 'thu',
-  4: 'fri',
-  5: 'sat',
-  6: 'sun',
-};
-
-const MONTH = {
-  1: 31,
-  2: 28,
-  3: 31,
-  4: 30,
-  5: 31,
-  6: 30,
-  7: 31,
-  8: 31,
-  9: 30,
-  10: 31,
-  11: 30,
-  12: 31,
-};
-
+const DAYS = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
 const calendar = document.querySelector('#calendar');
 
-calendar.classList.add('calendar');
-
 function calendarTable(year, month, element) {
-  const daysList = document.createElement('div');
+  const mon = month - 1;
+  const day = new Date(year, mon);
+  let header = '';
 
-  daysList.classList.add('calendar__days-list');
-
-  const daysArr = [];
-  const daysLength = Object.keys(DAYS).length;
-
-  for (let i = 0; i < daysLength; i += 1) {
-    const day = document.createElement('div');
-
-    day.textContent = `${DAYS[i]}`;
-    day.classList.add('calendar__day');
-    daysArr.push(day);
+  for (const item of DAYS) {
+    header += `<th>${item}</th>`;
   }
 
-  daysList.append(...daysArr);
+  let table = `<table><tr>${header}</tr><tr>`;
 
-  const datesArr = [];
-  let daysQuantity = MONTH[month];
-
-  if (year % 4 === 0 && month === 2) {
-    daysQuantity = 29;
+  for (let i = 0; i < getMyDay(day); i++) {
+    table += '<td></td>';
   }
 
-  const firstDay = new Date(`${month} 1 ${year}`);
-  const indent = firstDay.getDay() - 1;
+  while (day.getMonth() === mon) {
+    table += '<td>' + day.getDate() + '</td>';
 
-  for (let i = 1; i <= 35; i += 1) {
-    const date = document.createElement('div');
-
-    date.classList.add(`calendar__date--${i}`, `calendar__date`);
-
-    if (i > indent && i <= daysQuantity + indent) {
-      date.textContent = `${i - indent}`;
+    if (getMyDay(day) / 6 === 1) {
+      table += '</tr><tr>';
     }
 
-    datesArr.push(date);
+    day.setDate(day.getDate() + 1);
   }
 
-  const datesContainer = document.createElement('div');
+  if (getMyDay(day) !== 0) {
+    for (let i = getMyDay(day); i < 7; i++) {
+      table += '<td></td>';
+    }
+  }
 
-  datesContainer.classList.add('calendar__dates-list');
-  datesContainer.append(...datesArr);
-  element.append(daysList, datesContainer);
+  table += '</tr></table>';
 
-  return element;
+  element.innerHTML = table;
+}
+
+function getMyDay(date) {
+  let day = date.getDay() - 1;
+
+  if (day === -1) {
+    day = 6;
+  }
+
+  return day;
 }
 
 calendarTable(2020, 1, calendar);
