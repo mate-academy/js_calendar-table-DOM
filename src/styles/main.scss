@@ -1,9 +1,15 @@
 @import "utils";
 @import "fonts";
 @import "typography";
+@import "reset";
 
 body {
   background: $c-gray;
+  font-size: 20px;
+}
+
+section {
+  margin: 30px;
 }
 
 table {
@@ -12,15 +18,29 @@ table {
   background-color: white;
 }
 
+tr {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-right: 1px solid #118488;
+  border-top: 1px solid #118488;
+}
+
 td,
 th {
-  border: 1px solid #118488;
+  border-bottom: 1px solid #118488;
+  border-left: 1px solid #118488;
   padding: 10px;
   text-align: center;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 th {
   font-weight: bold;
   background-color: #fd5c63;
   color: #fff;
+  border-bottom: none;
 }
