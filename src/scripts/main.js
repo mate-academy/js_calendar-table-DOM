@@ -2,6 +2,74 @@
 
 const calendar = document.querySelector('#calendar');
 
+const currentTime = new Date();
+const monthNow = currentTime.getMonth() + 1;
+const yearNow = currentTime.getFullYear();
+
+function createSelector(startYear, endYear, currentYear, currentMonth) {
+  const select = document.createElement('section');
+  const monthes = [
+    'Январь',
+    'Февраль',
+    'Март',
+    'Апрель',
+    'Май',
+    'Июнь',
+    'Июль',
+    'Август',
+    'Сентябрь',
+    'Октябрь',
+    'Ноябрь',
+    'Декабрь',
+  ];
+
+  const fulOptionYear = () => {
+    let htmlOptions = '';
+
+    for (let i = startYear; i <= endYear; i++) {
+      htmlOptions = `${htmlOptions}<option value="${i}">${i}</option>`;
+    }
+
+    return htmlOptions;
+  };
+
+  const fulOptionMonth = () => {
+    const htmlMonthes = monthes.reduce((acc, month, idx) => {
+      return acc + `<option value="${idx + 1}">${month}</option>`;
+    }, '');
+
+    return htmlMonthes;
+  };
+
+  select.setAttribute('id', 'selector');
+
+  select.innerHTML = `
+     <form action="#">
+       <select id = "year" name = "year">
+          <option disabled>Выберите год</option>
+          ${fulOptionYear()}
+        </select>
+        <select id = "month" name = "year">
+          <option disabled>Выберите месяц</option>
+           ${fulOptionMonth()}
+         </select>
+         <button id="submit" type="button">Go to Date</button>
+      </form>
+  `;
+
+  Array.from(select.querySelectorAll(`option`))
+    .find(option => +option.value === currentYear)
+    .setAttribute('selected', 'selected');
+
+  Array.from(select.querySelectorAll(`option`))
+    .find(option => +option.value === currentMonth)
+    .setAttribute('selected', 'selected');
+
+  document.body.prepend(select);
+}
+
+createSelector(1990, 2030, yearNow, monthNow);
+
 function calendarTable(year, month, element) {
   element.innerHTML = '';
 
@@ -15,19 +83,17 @@ function calendarTable(year, month, element) {
   });
   // нумерация месяцев начинается с 0 - январь
   const getDaysInMonth = (y, m) => {
-    const date1 = new Date(y, m - 1, 1);
-    const date2 = m === 12
+    const dateThisMonth = new Date(y, m - 1, 1);
+    const dateNextMonth = m === 12
       ? new Date(y + 1, 0, 1)
       : new Date(y, m, 1);
 
-    return Math.round((date2 - date1) / 1000 / 3600 / 24);
+    return Math.round((dateNextMonth - dateThisMonth) / 1000 / 3600 / 24);
   };
-  const amounDays = getDaysInMonth(year, month);
-  const amounDaysCel = amounDays + daysTitle.indexOf(startDay)
-  > 35
-    ? 42
-    : 35;
-  const currentMonth = [...Array(amounDays).keys()];
+  const amountDays = getDaysInMonth(year, month);
+  const amountDaysCel = amountDays + daysTitle
+    .indexOf(startDay) > 35 ? 42 : 35;
+  const currentMonth = [...Array(amountDays).keys()];
   const clearDayStart = () => {
     const clearArr = [];
 
@@ -40,9 +106,9 @@ function calendarTable(year, month, element) {
   const clearDayEnd = () => {
     const clearArr = [];
 
-    while (clearArr.length <= amounDaysCel
-    - daysTitle.indexOf(startDay) - 1
-    - currentMonth.length) {
+    while (clearArr.length <= amountDaysCel
+      - daysTitle.indexOf(startDay) - 1
+      - currentMonth.length) {
       clearArr.push('');
     }
 
@@ -51,7 +117,8 @@ function calendarTable(year, month, element) {
   const days = [
     ...clearDayStart(),
     ...currentMonth,
-    ...clearDayEnd()];
+    ...clearDayEnd(),
+  ];
 
   const createHeader = (root, arr) => {
     const tr = document.createElement('tr');
@@ -83,15 +150,13 @@ function calendarTable(year, month, element) {
   createDays(table, days);
 }
 
-const button = document.getElementById('submit');
-const currentTime = new Date();
-const monthNow = currentTime.getMonth() + 1;
-const yearNow = currentTime.getFullYear();
-
-calendarTable(Number(yearNow),
+calendarTable(
+  Number(yearNow),
   Number(monthNow),
-  calendar);
+  calendar
+);
 
+const button = document.getElementById('submit');
 const handleSearch = () => {
   const selectorYear = document.getElementById('year');
   const inputYear = selectorYear[selectorYear.selectedIndex].value;

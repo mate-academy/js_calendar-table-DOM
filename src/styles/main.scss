@@ -1,8 +1,3 @@
-@import "utils";
-@import "fonts";
-@import "typography";
-@import "reset";
-
 body {
   background: $c-gray;
   font-size: 20px;
@@ -29,7 +24,6 @@ td,
 th {
   border-bottom: 1px solid #118488;
   border-left: 1px solid #118488;
-  padding: 10px;
   text-align: center;
   width: 70px;
   height: 70px;
