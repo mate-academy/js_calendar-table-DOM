@@ -6,10 +6,15 @@ body {
   background: $c-gray;
 }
 
+#calendar {
+  height: 500px;
+}
+
 table {
   border-collapse: collapse;
   color: #118488;
   background-color: white;
+  margin: auto;
 }
 
 td,
@@ -17,6 +22,8 @@ th {
   border: 1px solid #118488;
   padding: 10px;
   text-align: center;
+  width: 50px;
+  height: 50px;
 }
 
 th {
