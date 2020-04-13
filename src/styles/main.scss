@@ -6,21 +6,37 @@ body {
   background: $c-gray;
 }
 
-table {
-  border-collapse: collapse;
-  color: #118488;
-  background-color: white;
+* {
+  box-sizing: border-box;
 }
 
-td,
-th {
-  border: 1px solid #118488;
-  padding: 10px;
-  text-align: center;
-}
+.calendar {
 
-th {
-  font-weight: bold;
-  background-color: #fd5c63;
-  color: #fff;
+  &__wrapper {
+    border-collapse: collapse;
+    color: #118488;
+    background-color: #fff;
+    width: $width-cell*7;
+    border: 1px solid #118488;
+    margin: 30px auto;
+  }
+
+  &__head {
+    background: $head-background;
+    color: #fff;
+  }
+
+  &__cell {
+    @include cell-size(80px, 80px);
+    border: 2px solid #118488;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 200ms linear, color 200ms linear;
+
+    &:hover {
+      background-color: $head-background;
+      color: #fff;
+    }
+  }
 }

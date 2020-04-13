@@ -1,6 +1,13 @@
+@import "_vars";
+
 @mixin hover($_property, $_toValue) {
   transition: #{$_property} 0.3s;
   &:hover {
     #{$_property}: $_toValue;
   }
+}
+
+@mixin cell-size ($width-cell, $height-cell) {
+  width: $width-cell;
+  height: $height-cell;
 }
