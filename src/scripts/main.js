@@ -16,15 +16,11 @@ function calendarTable(year, month, element) {
     daysString += '<tr>';
 
     for (let i = 0; i < 7; i++) {
-      if (daysToPad > 0) {
+      if (daysToPad > 0 || dayCount >= daysInMonth) {
         daysString += `<td></td>`;
         daysToPad--;
       } else {
         daysString += `<td>${dayCount}</td>`;
-
-        if (dayCount === daysInMonth) {
-          break;
-        }
         dayCount++;
       }
     }
