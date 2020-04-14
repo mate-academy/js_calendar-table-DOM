@@ -22,5 +22,5 @@ Function `calendarTable(year, month, element)`
 
    Replace `<your_account>` with your Github username in the links
 
-    - [DEMO LINK](https://andreas-just.github.io/js_tree-from-object-DOM/)
-    - [PULL REQUEST](https://github.com/mate-academy/js_tree-from-object-DOM/pull/103/files)
+    - [DEMO LINK](https://andreas-just.github.io/js_calendar-table-DOM/)
+    - [PULL REQUEST](https://github.com/mate-academy/js_calendar-table-DOM/pull/33/files)
