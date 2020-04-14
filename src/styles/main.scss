@@ -4,6 +4,14 @@
 
 body {
   background: $c-gray;
+  margin: 0;
+}
+
+.calendar {
+  margin-top: 50px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 table {
@@ -15,12 +23,28 @@ table {
 td,
 th {
   border: 1px solid #118488;
-  padding: 10px;
+  padding: 15px;
   text-align: center;
 }
 
 th {
+  font-size: 18px;
   font-weight: bold;
   background-color: #fd5c63;
   color: #fff;
+}
+
+td {
+  transition: all 0.3s;
+}
+
+.active__td:hover {
+  background-color: #fd5c63;
+  cursor: pointer;
+  color: white;
+  transform: translateY(-5px);
+}
+
+.non-active__td {
+  background-color: rgb(224, 224, 224);
 }
