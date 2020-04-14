@@ -9,7 +9,7 @@ function calendarTable(year, month, element) {
   const firstDayOfWeek = (firstDay.getDay() === 0) ? 7 : firstDay.getDay();
   const emptyStartCellsQty = firstDayOfWeek - 1;
   const daysQty = new Date(year, month, 0).getDate();
-  const weeksQty = Math.ceil((daysQty + firstDayOfWeek) / daysInWeek);
+  const weeksQty = Math.ceil((daysQty + emptyStartCellsQty) / daysInWeek);
 
   const daysArray = [];
 
@@ -31,11 +31,11 @@ function calendarTable(year, month, element) {
   </tr>
   <tr>
   ${daysArray.map((day, i) => {
-    return ((i + 1) % 7 === 0) ? `${day}</tr><tr>` : day;
+    return ((i + 1) % daysInWeek === 0) ? `${day}</tr><tr>` : day;
   }).join('')}
   </tr>
 </table>
   `;
 }
 
-calendarTable(2020, 3, calendar);
+calendarTable(2020, 5, calendar);
