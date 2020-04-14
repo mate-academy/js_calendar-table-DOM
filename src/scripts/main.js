@@ -4,15 +4,17 @@ const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
   const daysOfWeek = [ 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс' ];
-
+  const daysInWeek = 7;
   const firstDay = new Date(`${year}-${month}-1`);
+  const firstDayOfWeek = (firstDay.getDay() === 0) ? 7 : firstDay.getDay();
+  const emptyStartCellsQty = firstDayOfWeek - 1;
   const daysQty = new Date(year, month, 0).getDate();
-  const weeksQty = Math.ceil((daysQty + firstDay.getDay()) / 7);
+  const weeksQty = Math.ceil((daysQty + firstDayOfWeek) / daysInWeek);
 
   const daysArray = [];
 
-  for (let i = 0; i < weeksQty * 7; i++) {
-    const day = i - firstDay.getDay() + 1;
+  for (let i = 1; i <= weeksQty * daysInWeek; i++) {
+    const day = i - emptyStartCellsQty;
 
     if (day > 0 && day <= daysQty) {
       daysArray.push(`<td>${day}</td>`);
@@ -36,4 +38,4 @@ function calendarTable(year, month, element) {
   `;
 }
 
-calendarTable(2019, 10, calendar);
+calendarTable(2020, 3, calendar);
