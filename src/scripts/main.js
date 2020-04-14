@@ -5,7 +5,7 @@ const calendar = document.querySelector('#calendar');
 function calendarTable(year, month, element) {
   let firstDayofWeek = new Date(year, month - 1, 0).getDay();
   const daysOfMonth = new Date(year, month, 0).getDate();
-  const weeksOfMonth = Math.ceil(daysOfMonth / 7);
+  const weeksOfMonth = Math.ceil((daysOfMonth + firstDayofWeek) / 7);
   const daysOfTheWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
   let nameDays = '';
   let nameCalendarContent = '';
