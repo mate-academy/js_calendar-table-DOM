@@ -19,24 +19,18 @@ function calendarTable(year, month, element) {
   }
 
   for (let row = 0; row < weeks; row++) {
-    tBody += `
-      <tr>
-    `;
+    tBody += '<tr>';
 
     for (let day = 0; day < days.length; day++) {
       if (row === 0 && day < startDay) {
-        tBody += `
-          <td></td>
-        `;
+        tBody += '<td></td>';
       } else if (dateCounter <= daysInMonth) {
         tBody += `
           <td>${dateCounter}</td>
         `;
         dateCounter++;
       } else {
-        tBody += `
-          <td></td>
-        `;
+        tBody += '<td></td>';
       }
     }
   }
