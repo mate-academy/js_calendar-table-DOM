@@ -3,7 +3,7 @@
 const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
-  const firstDay = new Date(year, month - 1).getDay();
+  const firstDay = new Date(year, month - 1).getDay() - 1;
   const daysInMonth = new Date(year, month, 0).getDate();
   const weeksCounter = Math.ceil(daysInMonth / 7);
   const daysName = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
@@ -39,4 +39,4 @@ function calendarTable(year, month, element) {
   `;
 }
 
-calendarTable(2019, 8, calendar);
+calendarTable(2020, 4, calendar);
