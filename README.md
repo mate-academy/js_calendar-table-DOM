@@ -14,10 +14,13 @@ Function `calendarTable(year, month, element)`
 ![screenshot](./example/example-calendar.png)
 
 ---
-**Read the guideline before start**
+1. **Read the guideline before start**
 
-[Guideline](https://github.com/mate-academy/js_task-DOM-guideline)
+    - [Guideline](https://github.com/mate-academy/js_task-DOM-guideline)
 
-**Result**
+2. **Result**
 
-- [UPDATE DEMO LINK](https://<your_account>.github.io/<repo_name>/)
+   Replace `<your_account>` with your Github username in the links
+
+    - [DEMO LINK](https://andreas-just.github.io/js_tree-from-object-DOM/)
+    - [PULL REQUEST](https://github.com/mate-academy/js_tree-from-object-DOM/pull/103/files)
