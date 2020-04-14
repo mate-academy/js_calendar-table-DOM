@@ -10,20 +10,19 @@ function calendarTable(year, month, element) {
   const table = document.createElement('table');
   let week = '';
   let monthStr = '';
-  const thead = `<thead>
-                <tr>
-                <td>ПН</td>
-                <td>ВТ</td>
-                <td>СР</td>
-                <td>ЧТ</td>
-                <td>ПТ</td>
-                <td>СБ</td>
-                <td>ВС</td>
-                </tr>
-                </thead>`;
+  const daysOfWeek = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
+  let thead = '';
+  const weekLength = 7;
+  const countOfWeeks = Math.ceil((weekDay + daysInMonth) / weekLength);
 
-  for (let weekCount = 1; weekCount < 6; weekCount++) {
-    for (let i = 1; i < 8; i++) {
+  for (let i = 0; i < daysOfWeek.length; i++) {
+    thead += `<td>${daysOfWeek[i]}</td>`;
+  };
+
+  thead = `<thead class="thead"><tr>${thead}</tr></thead>`;
+
+  for (let weekCount = 1; weekCount <= countOfWeeks; weekCount++) {
+    for (let i = 1; i <= weekLength; i++) {
       if (weekDay > i || daysCount > daysInMonth) {
         week += `<td></td>`;
       } else {
@@ -32,15 +31,12 @@ function calendarTable(year, month, element) {
       };
     };
     weekDay = 1;
-    monthStr += `<tr>${week}</tr>`;
+    monthStr += `<tr class="row">${week}</tr>`;
     week = '';
   };
 
   table.innerHTML = `${thead}<tbody>${monthStr}</tbody>`;
-  table.children[0].style.color = 'white';
-  table.children[0].style.backgroundColor = 'red';
-  table.children[1].style.color = 'teal';
-  table.children[1].style.fontSize = '24px';
+
   element.append(table);
 }
 
