@@ -3,6 +3,8 @@
 const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
+  element.innerHTML = '';
+
   const date = new Date(year, month - 1);
   let weekDay = date.getDay();
   const daysInMonth = new Date(year, month, 0).getDate();
@@ -40,4 +42,5 @@ function calendarTable(year, month, element) {
   element.append(table);
 }
 
+calendarTable(2019, 10, calendar);
 calendarTable(2019, 10, calendar);
