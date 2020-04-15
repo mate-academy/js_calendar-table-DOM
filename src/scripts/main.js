@@ -2,7 +2,7 @@
 
 const calendar = document.querySelector('#calendar');
 
-function calendarTable(year, month, element) {
+function calendarTable(element) {
   // WRITE YOUR CODE HERE
 
   const table = document.createElement('table');
@@ -36,27 +36,39 @@ function calendarTable(year, month, element) {
   }
 
   const tbodyElements = tbody.querySelectorAll('tr');
-  let day = 1;
 
-  for (let i = 0; i < tbodyElements.length; i++) {
-    const trElements = Array.from(tbodyElements[i].querySelectorAll('td'));
-    let dayOfWeek;
+  return creatingNewMonth;
 
-    do {
-      const date = new Date(year, month - 1, day);
+  function creatingNewMonth(year, month) {
+    let day = 1;
 
-      if (date.getMonth() !== month - 1) {
-        return;
-      }
+    for (let i = 0; i < tbodyElements.length; i++) {
+      const trElements = Array.from(tbodyElements[i].querySelectorAll('td'));
+      let dayOfWeek;
 
-      dayOfWeek = date.getDay();
+      trElements.forEach(item => {
+        item.textContent = '';
+      });
 
-      trElements.slice(dayOfWeek - 1)[0] // 0:вс - 6:сб => 0:пн - 6:вс
-        .textContent = day;
+      do {
+        const date = new Date(year, month - 1, day);
 
-      day += 1;
-    } while (dayOfWeek > 0);
+        if (date.getMonth() !== month - 1) {
+          return;
+        }
+
+        dayOfWeek = date.getDay();
+
+        trElements.slice(dayOfWeek - 1)[0] // 0:вс - 6:сб => 0:пн - 6:вс
+          .textContent = day;
+
+        day += 1;
+      } while (dayOfWeek > 0);
+    }
   }
 }
 
-calendarTable(2020, 4, calendar);
+const newMonth = calendarTable(calendar);
+
+newMonth(2020, 5);
+newMonth(2020, 2);
