@@ -3,49 +3,53 @@
 const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
-  const tHeder = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд']
-    .map(nameOfDay => `<th>${nameOfDay}</th>`).join('');
-  const days = new Date(year, month, 0).getDate();
-  const dayOfLastMonth = new Date(year, month - 1, 0).getDay();
-  const arrayOfDays = [];
-  let countDayOfLastMonth = 0;
+  const tableHead = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд']
+    .map(day => `<th>${day}</th>`).join('');
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const daysInPrevMonth = new Date(year, month - 1, 0).getDay();
+  const calendarContent = []; // масив для збору данних
+  // (к-ть днів для відображення з минулого місяця + к-ть днів з цього місяця)
+  let partOfPrevMonth = 0;
 
-  while (countDayOfLastMonth < dayOfLastMonth) {
-    countDayOfLastMonth++;
-    arrayOfDays.push('');
-  }
+  while (partOfPrevMonth < daysInPrevMonth) {
+    partOfPrevMonth++;
+    calendarContent.push(`<td></td>`);
+  } // визначаємо кількість порожніх клітинок
+  // (останніх днів з попереднього місяця) на початку календаря
 
-  let dayNum = 0;
+  let numberOfDay = 0;
 
-  while (dayNum < days) {
-    dayNum++;
-    arrayOfDays.push(dayNum);
-  }
+  while (numberOfDay < daysInMonth) {
+    numberOfDay++;
+    calendarContent.push(`<td>${numberOfDay}</td>`);
+  } // додаємо дані (дні в цьому місяці) для відображення в календар
 
-  const normalizeDay = arrayOfDays.map(day => `<td>${day}</td>`);
-  const tBody = [];
+  const tableBody = []; // масив для відображення даних в календарі по тижнях
+  // (днів з попереднього місяця + поточний місяць + наступний місяць)
 
-  for (let index = 0; index < normalizeDay.length + 1; index++) {
-    if (index % 7 === 0) {
-      tBody.push(`</tr><tr>`);
-    };
+  for (let daysInWeek = 0;
+    daysInWeek < calendarContent.length + 1;
+    daysInWeek++) {
+    if (daysInWeek % 7 === 0) {
+      tableBody.push(`</tr><tr>`);
+    }; // розділяємо зібрані дані для відображення по тижнях
 
-    if (index === normalizeDay.length) {
-      let i = normalizeDay.length;
+    if (daysInWeek === calendarContent.length) {
+      let i = calendarContent.length;
 
       while (i % 7 !== 0) {
-        tBody.push(`<td></td>`);
+        tableBody.push(`<td></td>`);
         i++;
-      }
-    }
+      } // якщо дані закінчились, а відображення останнього тижня не заповнено
+    } // доповнюємо порожніми клітинками (тобто це частина наступного місяця)
 
-    tBody.push(normalizeDay[index]);
+    tableBody.push(calendarContent[daysInWeek]);
   }
 
   element.innerHTML = `
     <table>
-      <tr>${tHeder}</tr>
-      <tr>${tBody.join('')}</tr>
+      <tr>${tableHead}</tr>
+      <tr>${tableBody.join('')}</tr>
     </table>`;
 }
 
