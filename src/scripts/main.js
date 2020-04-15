@@ -3,20 +3,20 @@
 const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
-  const date = new Date(year, month - 1, 1);
-  const firstDay = date.getDay();
-  const days = new Date(year, month - 1, 0).getDate();
+  const date = new Date(year, month - 1, 0);
+  let firstDay = date.getDay();
+  const daysCount = new Date(year, month - 1, 0).getDate();
   const table = document.createElement('table');
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');
+  const rowsCount = Math.ceil(daysCount / 7) + 1;
   const weekDays = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
-  let number = 7 - (firstDay - 1) + 1;
-  let firstWeekNumber = 1;
+  let number = 1;
 
   table.append(thead);
   table.append(tbody);
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < rowsCount; i++) {
     const tr = document.createElement('tr');
 
     if (i === 0) {
@@ -25,7 +25,7 @@ function calendarTable(year, month, element) {
       tbody.append(tr);
     }
 
-    for (let j = 0; j < 7; j++) {
+    for (let j = 0; j < weekDays.length; j++) {
       const th = document.createElement('th');
       const td = document.createElement('td');
 
@@ -33,12 +33,9 @@ function calendarTable(year, month, element) {
         th.innerHTML = weekDays[j];
         tr.append(th);
       } else {
-        if ((i === 1) && (j >= firstDay - 1)) {
-          td.innerHTML = firstWeekNumber;
-          firstWeekNumber++;
-        }
-
-        if ((i >= 2) && (number <= days)) {
+        if (firstDay > 0 || number > daysCount) {
+          firstDay--;
+        } else {
           td.innerHTML = number;
           number++;
         }
