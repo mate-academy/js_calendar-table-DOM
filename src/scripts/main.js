@@ -3,13 +3,13 @@
 const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
-  const date = new Date(year, month - 1, 0);
+  const date = new Date(year, month - 1, 1);
   let firstDay = date.getDay();
-  const daysCount = new Date(year, month - 1, 0).getDate();
+  const daysCount = new Date(year, month, 0).getDate();
   const table = document.createElement('table');
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');
-  const rowsCount = Math.ceil(daysCount / 7) + 1;
+  const rowsCount = Math.ceil((daysCount + firstDay) / 7) + 1;
   const weekDays = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
   let number = 1;
 
@@ -33,7 +33,7 @@ function calendarTable(year, month, element) {
         th.innerHTML = weekDays[j];
         tr.append(th);
       } else {
-        if (firstDay > 0 || number > daysCount) {
+        if (firstDay - 1 > 0 || number > daysCount) {
           firstDay--;
         } else {
           td.innerHTML = number;
