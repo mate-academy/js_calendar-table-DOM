@@ -9,7 +9,7 @@ const options = {
 
 function calendarTable(year, month, element) {
   const date = new Date(year, month - 1);
-  const numDayInMonth = new Date(year, month, 0).getDate();
+  const numDaysInMonth = new Date(year, month, 0).getDate();
   const starWeekDay = date.getDay() || 7;
   const endWeekDay = new Date(year, month).getDay();
   const strDate = date.toLocaleDateString('en-US', options);
@@ -25,7 +25,7 @@ function calendarTable(year, month, element) {
     body += `<td></td>`;
   }
 
-  for (let currDay = 0; currDay < numDayInMonth; currDay++) {
+  for (let currDay = 0; currDay < numDaysInMonth; currDay++) {
     body += `<td>${currDay + 1}</td>`;
 
     if ((currDay + starWeekDay) % 7 === 0) {
