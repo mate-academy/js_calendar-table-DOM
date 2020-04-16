@@ -3,18 +3,6 @@
 const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month) {
-  const days = Math.round((new Date(year, month)
-    - new Date(year, month - 1))
-    / 24 / 3600 / 1000);
-  const nameOfDays = {
-    'Mon': 1,
-    'Tus': 2,
-    'Wed': 3,
-    'Thu': 4,
-    'Fri': 5,
-    'Sat': 6,
-    'Sun': 7,
-  };
   const daysOfWeek = [
     'пн',
     'вт',
@@ -24,16 +12,20 @@ function calendarTable(year, month) {
     'сб',
     'нд',
   ];
-  const day = nameOfDays[new Date(year, month - 1).toString().split(' ')[0]];
-  let count = 2 - day;
+  const daysImMonth = new Date(year, month, 0).getDate();
+  const daysInWeek = 7;
+  const day = new Date(year, month - 1).getDay() === 0
+    ? 7
+    : new Date(year, month - 1).getDay();
+  let count = 1;
   const arrWeeks = [];
 
-  for (let i = 0; i < (day + days - 1) / 7; i++) {
+  for (let i = 0; i < (daysImMonth + day - 1) / daysInWeek; i++) {
     const myArr = [];
 
-    for (let j = 0; j < 7; j++) {
-      if (count <= days && count >= 1) {
-        myArr.push(`<td>${count}</td>`);
+    for (let j = 0; j < daysInWeek; j++) {
+      if (count < daysImMonth + day && count >= day) {
+        myArr.push(`<td>${count - day + 1}</td>`);
       } else {
         myArr.push(`<td></td>`);
       }
@@ -57,3 +49,5 @@ function calendarTable(year, month) {
 }
 
 calendarTable(2020, 3, calendar);
+calendarTable(2020, 4, calendar);
+calendarTable(2020, 4, calendar);
