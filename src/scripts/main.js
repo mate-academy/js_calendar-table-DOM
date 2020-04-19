@@ -56,27 +56,23 @@ function calendarTable(defaultYear, defaultMonth, element) {
   }
 
   function getWeeks(year, month) {
-    const nextMonth = new Date(year, month + 1, 1);
-    let current = new Date(year, month, 1);
-    const realMonth = current.getMonth();
-
-    while (current.getDay() !== 1) {
-      current.setDate(current.getDate() - 1);
-    }
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(`${year},${month + 1},1`).getDay() || 7;
+    let currentDate = 2 - firstDay;
 
     const weeks = [];
 
-    while (current < nextMonth) {
+    while (currentDate < daysInMonth) {
       const week = [];
 
       for (let i = 0; i < 7; i++) {
-        if (current.getMonth() !== realMonth) {
+        if (currentDate < 1 || currentDate > daysInMonth) {
           week.push(0);
         } else {
-          week.push(current.getDate());
+          week.push(currentDate);
         }
 
-        current = current.setDate(current.getDate() + 1);
+        currentDate++;
       }
 
       weeks.push(week);
