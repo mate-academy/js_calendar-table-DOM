@@ -7,6 +7,7 @@ body {
 }
 
 table {
+  margin: 0 auto;
   border-collapse: collapse;
   color: #118488;
   background-color: white;
@@ -23,4 +24,8 @@ th {
   font-weight: bold;
   background-color: #fd5c63;
   color: #fff;
+}
+
+h1 {
+  text-align: center;
 }
