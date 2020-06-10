@@ -11,11 +11,6 @@ function calendarTable(year, month, element) {
   const tbody = document.createElement('tbody');
   const firstMonthDay = new Date(`${year} ${month} 1`).getDay();
 
-  console.log(daysInMonth);
-
-  // eslint-disable-next-line no-console
-  // console.log(firstMonthDay);
-
   element.append(table);
   table.append(thead);
   table.append(tbody);
@@ -28,23 +23,23 @@ function calendarTable(year, month, element) {
     thead.append(th);
   }
 
-  let day = 1;
+  let cell = 1;
 
-  while (day < daysInMonth + firstMonthDay) {
+  while (cell < daysInMonth + firstMonthDay) {
     let tdBody;
 
-    if (day % 7 === 1) {
+    if (cell % 7 === 1) {
       tdBody = document.createElement('tr');
 
       tbody.append(tdBody);
     }
     tdBody = document.createElement('td');
 
-    if (day > firstMonthDay - 1) {
-      tdBody.textContent = day - firstMonthDay + 1;
+    if (cell > firstMonthDay - 1) {
+      tdBody.textContent = cell - firstMonthDay + 1;
     }
     tbody.append(tdBody);
-    day++;
+    cell++;
   }
 }
 
