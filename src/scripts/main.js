@@ -5,11 +5,11 @@ const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
   const weekDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-  const daysInMonth = 33 - new Date(year, month - 1, 33).getDate();
   const table = document.createElement('table');
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');
   const firstMonthDay = new Date(`${year} ${month} 1`).getDay();
+  const daysInMonth = new Date(year, month, 0).getDate();
 
   element.append(table);
   table.append(thead);
@@ -58,4 +58,4 @@ function calendarTable(year, month, element) {
   }
 }
 
-calendarTable(2019, 10, calendar);
+calendarTable(2020, 6, calendar);
