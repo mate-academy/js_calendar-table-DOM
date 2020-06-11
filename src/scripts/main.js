@@ -3,11 +3,27 @@
 const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
-  const table = setTable(element);
+  const table = create('table', element);
+
+  setTableHead(table);
+  setTableBody(year, month, table);
+}
+
+function setTableHead(table) {
+  const head = create('thead', table);
+  const row = create('tr', head);
+
+  const weekDays = ['Mn', 'Tu', 'Wd', 'Th', 'Fr', 'St', 'Sn'];
+
+  for (let i = 0; i < 7; i++) {
+    create('th', row).textContent = weekDays[i];
+  }
+}
+
+function setTableBody(year, month, table) {
   const body = create('tbody', table);
 
   const date = new Date(year, month - 1);
-
   const firstDay = (date.getDay() || 7) - 1;
   const daysAmount = new Date(year, month, 0).getDate();
 
@@ -29,25 +45,9 @@ function calendarTable(year, month, element) {
         continue;
       }
 
-      cell.textContent = daysCounter;
-
-      daysCounter++;
+      cell.textContent = daysCounter++;
     }
   }
-}
-
-function setTable(element) {
-  const table = create('table', element);
-  const head = create('thead', table);
-  const row = create('tr', head);
-
-  const weekDays = ['Mn', 'Tu', 'Wd', 'Th', 'Fr', 'St', 'Sn'];
-
-  for (let i = 0; i < 7; i++) {
-    create('th', row).textContent = weekDays[i];
-  }
-
-  return table;
 }
 
 function create(tagName, element) {
@@ -58,4 +58,4 @@ function create(tagName, element) {
   return innerElement;
 }
 
-calendarTable(2019, 10, calendar);
+calendarTable(2020, 6, calendar);
