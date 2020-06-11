@@ -36,15 +36,16 @@ function setTableBody(year, month, table) {
     for (let i = 0; i < 7; i++) {
       const cell = create('td', row);
 
-      if ((daysCounter === 1 && i !== firstDay) || daysCounter > daysAmount) {
+      if (daysCounter === 1 && i !== firstDay) {
+        continue;
+      }
+
+      if (daysCounter > daysAmount) {
+        isCurrentMonth = false;
         continue;
       }
 
       cell.textContent = daysCounter++;
-    }
-
-    if (daysCounter > daysAmount) {
-      isCurrentMonth = false;
     }
   }
 }
