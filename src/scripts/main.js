@@ -24,21 +24,36 @@ function calendarTable(year, month, element) {
   }
 
   let cell = 1;
+  const trBody0 = document.createElement('tr');
+  const trBody1 = document.createElement('tr');
+  const trBody2 = document.createElement('tr');
+  const trBody3 = document.createElement('tr');
+  const trBody4 = document.createElement('tr');
+
+  function appendElements(tr, td) {
+    tbody.append(tr);
+    tr.append(td);
+  }
 
   while (cell < daysInMonth + firstMonthDay) {
-    let tdBody;
-
-    if (cell % 7 === 1) {
-      tdBody = document.createElement('tr');
-
-      tbody.append(tdBody);
-    }
-    tdBody = document.createElement('td');
+    const tdBody = document.createElement('td');
 
     if (cell > firstMonthDay - 1) {
       tdBody.textContent = cell - firstMonthDay + 1;
     }
-    tbody.append(tdBody);
+
+    if (cell > 0 && cell < 8) {
+      appendElements(trBody0, tdBody);
+    } else if (cell > 7 && cell < 15) {
+      appendElements(trBody1, tdBody);
+    } else if (cell > 14 && cell < 22) {
+      appendElements(trBody2, tdBody);
+    } else if (cell > 21 && cell < 29) {
+      appendElements(trBody3, tdBody);
+    } else if (cell > 28) {
+      appendElements(trBody4, tdBody);
+    }
+
     cell++;
   }
 }
