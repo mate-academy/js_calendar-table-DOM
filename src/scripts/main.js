@@ -36,16 +36,15 @@ function setTableBody(year, month, table) {
     for (let i = 0; i < 7; i++) {
       const cell = create('td', row);
 
-      if (daysCounter === 1 && i !== firstDay) {
-        continue;
-      }
-
-      if (daysCounter > daysAmount) {
-        isCurrentMonth = false;
+      if ((daysCounter === 1 && i !== firstDay) || daysCounter > daysAmount) {
         continue;
       }
 
       cell.textContent = daysCounter++;
+    }
+
+    if (daysCounter > daysAmount) {
+      isCurrentMonth = false;
     }
   }
 }
@@ -58,4 +57,4 @@ function create(tagName, element) {
   return innerElement;
 }
 
-calendarTable(2020, 6, calendar);
+calendarTable(2019, 10, calendar);
