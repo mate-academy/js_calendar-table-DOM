@@ -4,10 +4,7 @@ const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
   const daysInMonth = (new Date(year, month, 0)).getDate();
-  let weekDay = (new Date(year, month - 1, 1)).getDay() - 1;
-
-  weekDay = weekDay < 0 ? 6 : weekDay;
-
+  const weekDay = (new Date(year, month - 1, 1).getDay() || 7) - 1;
   const rows = (daysInMonth + weekDay) / 7;
   const cal = [];
   let day = 1;
