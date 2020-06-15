@@ -46,4 +46,4 @@ function calendarTable(year, month, element) {
   element.append(table);
 }
 
-calendarTable(2019, 11, calendar);
+calendarTable(2019, 10, calendar);
