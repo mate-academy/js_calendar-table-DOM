@@ -6,17 +6,15 @@ function calendarTable(year, month, element) {
   element.innerHTML = `
     <table>
       <thead>
-      <thead>
-      <tr>
-        <th>ПН</th>
-        <th>ВС</th>
-        <th>СР</th>
-        <th>ЧТ</th>
-        <th>ПТ</th>
-        <th>СБ</th>
-        <th>ВС</th>
-      </tr>
-    </thead>
+        <tr>
+          <th>ПН</th>
+          <th>ВТ</th>
+          <th>СР</th>
+          <th>ЧТ</th>
+          <th>ПТ</th>
+          <th>СБ</th>
+          <th>ВС</th>
+        </tr>
       </thead>
       <tbody>
       </tbody>
@@ -24,8 +22,13 @@ function calendarTable(year, month, element) {
   `;
 
   const week = 7;
-  const startDay = new Date(year, month - 1).getDay();
-  const lastDay = new Date(year, month + 1, 0).getDate();
+  let startDay = new Date(year, month - 1, 1).getDay() - 1;
+
+  if (startDay < 0) {
+    startDay = week - 1;
+  };
+
+  const lastDay = new Date(year, month, 0).getDate();
   const rows = Math.ceil(lastDay + startDay) / week;
 
   const tbody = document.getElementsByTagName('tbody')[0];
@@ -44,7 +47,7 @@ function calendarTable(year, month, element) {
 
   let counter = 1;
 
-  for (let i = startDay - 1; i < lastDay + startDay; i++) {
+  for (let i = startDay; i < lastDay + startDay; i++) {
     const td = document.getElementsByTagName('td')[i];
 
     td.textContent = counter;
@@ -52,4 +55,4 @@ function calendarTable(year, month, element) {
   };
 }
 
-calendarTable(2019, 10, calendar);
+calendarTable(2020, 12, calendar);
