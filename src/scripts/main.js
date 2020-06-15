@@ -27,8 +27,9 @@ function calendarTable(year, month, element) {
       wd++;
     }
 
-    for (let y = wd; y < 7; y++) {
+    while (wd < 7) {
       cal.push(`<td></td>`);
+      wd++;
     };
 
     cal.push('</tr>');
