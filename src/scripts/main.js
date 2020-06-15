@@ -24,7 +24,7 @@ function calendarTable(element, year, month) {
   while (d.getMonth() === mon) {
     table += '<td>' + d.getDate() + '</td>';
 
-    if (getDay(d) % 7 === 6) { // sunday, last day of week - newline
+    if (getDay(d) % 7 === 6) {
       table += '</tr><tr>';
     }
 
