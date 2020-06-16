@@ -8,9 +8,12 @@ function calendarTable(year, month, element) {
   const table = document.createElement('table');
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');
-  const firstMonthDay = new Date(`${year} ${month} 1`).getDay();
+  let firstMonthDay = new Date(`${year} ${month} 1`).getDay();
   const daysInMonth = new Date(year, month, 0).getDate();
 
+  if (firstMonthDay === 0) {
+    firstMonthDay = 7;
+  }
   element.append(table);
   table.append(thead);
   table.append(tbody);
@@ -29,6 +32,7 @@ function calendarTable(year, month, element) {
   const tr2 = document.createElement('tr');
   const tr3 = document.createElement('tr');
   const tr4 = document.createElement('tr');
+  const tr5 = document.createElement('tr');
 
   function appendElements(tr, td) {
     tbody.append(tr);
@@ -50,12 +54,13 @@ function calendarTable(year, month, element) {
       appendElements(tr2, td);
     } else if (cell > 21 && cell < 29) {
       appendElements(tr3, td);
-    } else if (cell > 28) {
+    } else if (cell > 28 && cell < 36) {
       appendElements(tr4, td);
+    } else {
+      appendElements(tr5, td);
     }
-
     cell++;
   }
 }
 
-calendarTable(2020, 6, calendar);
+calendarTable(2018, 7, calendar);
