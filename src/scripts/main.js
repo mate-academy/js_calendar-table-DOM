@@ -49,4 +49,4 @@ function calendarTable(year, month, element) {
   }
 }
 
-calendarTable(2019, 10, calendar);
+calendarTable(2020, 6, calendar);
