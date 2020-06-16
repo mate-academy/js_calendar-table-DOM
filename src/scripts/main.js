@@ -8,11 +8,11 @@ function calendarTable(year, month, element) {
   };
 
   const monthLenght = daysInMonth(year, month);
-
   const date = new Date(year, month);
   const startPosition = (date.getDay() + 6) % 7;
   const days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
   const table = document.createElement('table');
+  const calendarRows = (startPosition >= 6 && monthLenght === 31) ? 6 : 5;
 
   calendar.append(table);
 
@@ -29,7 +29,7 @@ function calendarTable(year, month, element) {
     day.append(dayHeader);
   };
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < calendarRows; i++) {
     const week = document.createElement('tr');
 
     table.append(week);
