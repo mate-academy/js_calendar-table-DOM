@@ -8,7 +8,7 @@ function calendarTable(year, month, element) {
   };
 
   const monthLenght = daysInMonth(year, month);
-  const date = new Date(year, month);
+  const date = new Date(year, month - 1);
   const startPosition = (date.getDay() + 6) % 7;
   const days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
   const table = document.createElement('table');
@@ -56,4 +56,4 @@ function calendarTable(year, month, element) {
   };
 }
 
-calendarTable(2018, 6, calendar);
+calendarTable(2020, 6, calendar);
