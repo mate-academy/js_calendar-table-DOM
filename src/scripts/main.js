@@ -11,7 +11,6 @@ function calendarTable(year, month, element) {
   element.append(table);
 
   // Table Header
-
   const tableHeader = document.createElement('thead');
 
   table.append(tableHeader);
@@ -24,7 +23,6 @@ function calendarTable(year, month, element) {
   }
 
   // Table Body
-
   const daysInMonth = new Date(year, month, 0).getDate();
   const weeksInMonth = Math.ceil((daysInMonth + firstDay) / 7);
 
@@ -45,7 +43,6 @@ function calendarTable(year, month, element) {
   }
 
   // Numeration
-
   let dayCounter = 1;
 
   for (let i = firstDay; i < lastDay + firstDay; i++) {
