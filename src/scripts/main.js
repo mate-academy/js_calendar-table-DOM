@@ -4,7 +4,7 @@ const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
   function daysInMonth(y, m) {
-    return 32 - new Date(y, m, 32).getDate();
+    return 32 - new Date(y, m - 1, 32).getDate();
   };
 
   const monthLenght = daysInMonth(year, month);
@@ -56,4 +56,4 @@ function calendarTable(year, month, element) {
   };
 }
 
-calendarTable(2020, 6, calendar);
+calendarTable(2020, 4, calendar);
