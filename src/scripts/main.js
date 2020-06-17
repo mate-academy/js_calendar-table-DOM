@@ -22,10 +22,15 @@ function calendarTable(year, month, element) {
   }
 
   const daysAmount = new Date(year, month, 0).getDate();
-  const weeksAmount = Math.ceil(daysAmount / 7);
-  const startDay = new Date(year, month - 1).getDay();
+  let startDay = new Date(year, month - 1).getDay();
   const tbody = document.createElement('tbody');
   let daysCounter = 0;
+
+  if (startDay === 0) {
+    startDay = 7;
+  }
+
+  const weeksAmount = Math.ceil((daysAmount + startDay) / 7);
 
   for (let i = 0; i < weeksAmount; i++) {
     const week = document.createElement('tr');
@@ -51,4 +56,4 @@ function calendarTable(year, month, element) {
   calendar.append(table);
 }
 
-calendarTable(2019, 3, calendar);
+calendarTable(2020, 8, calendar);
