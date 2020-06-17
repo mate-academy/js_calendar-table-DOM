@@ -8,11 +8,11 @@ const calendarTable = (year, month, element) => {
 
   firstCalendarDay = firstCalendarDay === 0 ? 7 : firstCalendarDay;
 
-  const daysQuantity = Array(new Date(year, month + 1, 0).getDate())
+  const daysQuantity = Array(new Date(year, month, 0).getDate())
     .fill('')
     .map((i, index) => index + 1);
 
-  const lastDay = new Date(year, month - 1, daysQuantity.length).getDay();
+  const lastDay = new Date(year, month + 1, daysQuantity.length).getDay();
 
   element.innerHTML = `
     <table>
@@ -37,8 +37,7 @@ ${daysQuantity
     .join('')
 }
 ${Array(lastDay)
-    .fill('<td></td>')
-    .reduce((row, cell) => row + cell, '')}
+    .fill('<td></td>')}
       </tbody>
     </table>
   `;
@@ -46,4 +45,4 @@ ${Array(lastDay)
   return element;
 };
 
-calendarTable(2020, 9, calendar);
+calendarTable(2020, 8, calendar);
