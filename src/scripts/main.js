@@ -46,4 +46,4 @@ ${Array(lastDay)
   return element;
 };
 
-calendarTable(2020, 6, calendar);
+calendarTable(2020, 9, calendar);
