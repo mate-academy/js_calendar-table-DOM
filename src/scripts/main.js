@@ -21,26 +21,26 @@ function calendarTable(year, month, element) {
   }
 
   const daysInMonth = new Date(year, month, 0).getDate();
-  const monthStart = new Date(year, month - 1, 1).getDay();
-  const rowCOunt = Math.ceil(daysInMonth / 7);
+  const monthStart = (new Date(year, month - 1).getDay() || 7);
+  const rowCOunt = Math.ceil((daysInMonth + monthStart - 1) / 7);
 
   for (let i = 0; i < rowCOunt; i++) {
-    const tableRow = document.createElement('tr');
+    const bodyRow = document.createElement('tr');
 
-    tableBody.append(tableRow);
+    tableBody.append(bodyRow);
 
     for (let j = 1; j <= 7; j++) {
       const bodyCell = document.createElement('td');
 
-      if (j + (i * 7) < monthStart || j + (i * 7) - monthStart >= daysInMonth) {
+      if (j + (i * 7) < monthStart || j + (i * 7) >= daysInMonth + monthStart) {
         bodyCell.innerText = '';
       } else {
-        bodyCell.innerText = j + (i * 7) - monthStart + 1;
+        bodyCell.innerText = j + (i * 7) - (monthStart - 1);
       }
 
-      tableRow.append(bodyCell);
+      bodyRow.append(bodyCell);
     }
   }
 }
 
-calendarTable(2019, 10, calendar);
+calendarTable(2020, 2, calendar);
