@@ -4,45 +4,46 @@ const calendar = document.querySelector('#calendar');
 
 const calendarTable = (year, month, element) => {
   const days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'НД'];
-  let firstCalendarDay = new Date(year, month - 1, 0).getDay();
+  const firstCalendarDay = new Date(year, month - 1).getDay() || 7;
+  const daysQuantity = new Date(year, month, 0).getDate();
+  let currentDay = 2 - firstCalendarDay;
+  const weeks = [];
 
-  firstCalendarDay = firstCalendarDay === 0 ? 7 : firstCalendarDay;
+  while (currentDay < daysQuantity) {
+    const week = [];
 
-  const daysQuantity = Array(new Date(year, month, 0).getDate())
-    .fill('')
-    .map((i, index) => index + 1);
+    for (let i = 0; i < 7; i++) {
+      if (currentDay < 1 || currentDay > daysQuantity) {
+        week.push(0);
+      } else {
+        week.push(currentDay);
+      }
+      currentDay++;
+    }
 
-  const lastDay = new Date(year, month + 1, daysQuantity.length).getDay();
+    weeks.push(week);
+  }
 
   element.innerHTML = `
-    <table>
-      <thead>
+  <table>
+    <thead>
+      <tr>
+        ${days.map(day => `<th>${day}</th>`).join('')}
+      </tr>
+    </thead>
+    <tbody>
+      ${weeks.map(week => `
         <tr>
-          ${days.map(day => `<th>${day}</th>`).join('')}
+          ${week.map(day => `
+            <td>
+              ${day || ''}
+            </td>
+          `).join('')}
         </tr>
-      </thead>
-      <tbody>
-        <tr>
-${Array(firstCalendarDay)
-    .fill('<td></td>')
-    .reduce((row, cell) => row + cell, '')}
-${daysQuantity
-    .map((day, index) => {
-      if ((firstCalendarDay + index) % 7 === 0) {
-        return `<tr><td>${day}</td>`;
-      }
-
-      return `<td>${day}</td>`;
-    })
-    .join('')
-}
-${Array(lastDay)
-    .fill('<td></td>')}
-      </tbody>
-    </table>
+      `).join('')}
+    </tbody>
+  </table>
   `;
-
-  return element;
 };
 
-calendarTable(2020, 8, calendar);
+calendarTable(2020, 9, calendar);
