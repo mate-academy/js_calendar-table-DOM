@@ -19,7 +19,7 @@ function calendarTable(year, month, element) {
     <tbody>
     </tbody>
   </table>
-`;
+  `;
 
   const firstDay = new Date(year, month - 1, 0).getDay();
   const lastDay = new Date(year, month, 0).getDate();
