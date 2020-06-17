@@ -7,7 +7,7 @@ function calendarTable(year, month, element) {
                 <th>чт</th><th>пт</th><th>сб</th><th>нд</th></tr>`;
   const day = new Date(year, month).getDay() || 7;
   const lastDay = new Date(year, month + 1, 0).getDate();
-  const rows = Math.ceil((lastDay - day) / 7) + 1;
+  const rows = Math.floor((lastDay - day) / 7) + 1;
 
   for (let i = 0, d = 1; i < rows; i++) {
     let createTr = '<tr>';
