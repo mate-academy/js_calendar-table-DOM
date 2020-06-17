@@ -30,7 +30,9 @@ function calendarTable(year, month, element) {
     startDay = 7;
   }
 
-  const weeksAmount = Math.ceil((daysAmount + startDay) / 7);
+  const weeksAmount = daysAmount + startDay === 36
+    ? Math.ceil((daysAmount + startDay) / 7) - 1
+    : Math.ceil((daysAmount + startDay) / 7);
 
   for (let i = 0; i < weeksAmount; i++) {
     const week = document.createElement('tr');
@@ -56,4 +58,4 @@ function calendarTable(year, month, element) {
   calendar.append(table);
 }
 
-calendarTable(2020, 8, calendar);
+calendarTable(2020, 5, calendar);
