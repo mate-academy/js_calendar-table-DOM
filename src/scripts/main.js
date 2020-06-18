@@ -5,8 +5,8 @@ const calendar = document.querySelector('#calendar');
 function calendarTable(year, month, element) {
   // WRITE YOUR CODE HERE
   const weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-  const firstWeekDay = new Date(year, month, 1).getDay();
-  const lastMonthDay = new Date(year, month + 1, 0).getDate();
+  const firstWeekDay = new Date(year, month - 1, 1).getDay();
+  const lastMonthDay = new Date(year, month, 0).getDate();
   const calendarRows = (firstWeekDay + lastMonthDay) / 7;
   const table = document.createElement('table');
   const tbody = document.createElement('tbody');
@@ -42,4 +42,4 @@ function calendarTable(year, month, element) {
   }
 }
 
-calendarTable(2001, 1, calendar);
+calendarTable(2020, 1, calendar);
