@@ -5,11 +5,7 @@ const calendar = document.querySelector('#calendar');
 function calendarTable(year, month, element) {
   const weekDayList = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
   const days = new Date(year, month, 0).getDate();
-  let start = new Date(year, month - 1).getDay() - 1;
-
-  if (start < 0) {
-    start = 6;
-  }
+  const start = (new Date(year, month - 1).getDay() || 7) - 1;
 
   element.innerHTML = `
     <table>
