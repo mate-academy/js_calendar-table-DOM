@@ -3,44 +3,49 @@
 const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
-  let table = `<table><tr><th>пн</th><th>вт</th><th>ср</th>
-                <th>чт</th><th>пт</th><th>сб</th><th>нд</th></tr>`;
+  element.innerHTML = `
+  <table>
+    <thead>
+      <tr>
+        <th>Пн</th>
+        <th>Вт</th>
+        <th>Ср</th>
+        <th>Чт</th>
+        <th>Пт</th>
+        <th>Сб</th>
+        <th>Нд</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+`;
 
-  const day = new Date(year, month);
+  const firstDay = new Date(year, month - 1, 0).getDay();
+  const lastDay = new Date(year, month, 0).getDate();
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const weeksInMonth = Math.ceil((daysInMonth + firstDay) / 7);
+  const tableBody = document.querySelector('tbody');
 
-  for (let i = 0; i < getDay(day); i++) {
-    table += '<td></td>';
-  }
+  for (let i = 0; i < weeksInMonth; i++) {
+    const tr = document.createElement('tr');
 
-  while (day.getMonth() === month) {
-    table += `<td>${day.getDate()}</td>`;
+    tableBody.append(tr);
 
-    if (getDay(day) % 7 === 6) {
-      table += `</tr><tr>`;
+    for (let j = 1; j <= 7; j++) {
+      const weekDay = document.createElement('td');
+
+      tr.append(weekDay);
     }
-
-    day.setDate(day.getDate() + 1);
   }
 
-  if (getDay(day) !== 0) {
-    for (let i = getDay(day); i < 7; i++) {
-      table += `<td></td>`;
-    }
-  }
+  let counter = 1;
 
-  table += `</tr></table>`;
+  for (let i = firstDay; i < lastDay + firstDay; i++) {
+    const td = document.querySelectorAll('td')[i];
 
-  element.innerHTML = table;
-}
-
-function getDay(date) {
-  let day = date.getDay();
-
-  if (day === 0) {
-    day = 7;
+    td.textContent = counter;
+    counter++;
   };
-
-  return day - 1;
 }
-
-calendarTable(2020, 1, calendar);
+calendarTable(2020, 2, calendar);
