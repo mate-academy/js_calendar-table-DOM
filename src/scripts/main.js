@@ -3,9 +3,10 @@
 const calendar = document.querySelector('#calendar');
 
 function calendarTable(year, month, element) {
-  element.insertAdjacentHTML('beforebegin',
-    `<table>
-            <tr>
+  const table = document.createElement('table');
+
+  table.insertAdjacentHTML('afterbegin',
+    `<tr>
               <th>пн</th>
               <th>вт</th>
               <th>ср</th>
@@ -13,68 +14,30 @@ function calendarTable(year, month, element) {
               <th>пт</th>
               <th>сб</th>
               <th>вс</th>
-            </tr>
-            
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </table>`
+            </tr>`
   );
 
-  const date = new Date(year, month);
-  const monthFirstDay = date.getDay() === 0 ? 7 : date.getDay();
-  const monthDays = new Date(year, month === 11 ? 0 : month + 1, 0).getDate();
-  const tdList = document.querySelectorAll('td');
+  const date = new Date(year, month - 1).getDay();
+  const monthFirstDay = date === 0 ? 7 : date;
+  const monthDays = new Date(year, month === 12 ? 0 : month, 0).getDate();
+  let day = 2 - monthFirstDay;
 
-  for (let i = 1; i <= monthDays; i++) {
-    tdList[(monthFirstDay - 1) + (i - 1)].textContent = `${i}`;
+  while (day <= monthDays) {
+    const tr = document.createElement('tr');
+    const week = day + 7;
+
+    while (day < week) {
+      const td = document.createElement('td');
+
+      td.textContent = `${day < 1 || day > monthDays ? '' : day}`;
+      tr.append(td);
+      day++;
+    }
+
+    table.append(tr);
   }
+
+  element.append(table);
 }
 
 calendarTable(2019, 10, calendar);
